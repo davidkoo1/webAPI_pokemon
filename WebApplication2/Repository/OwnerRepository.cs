@@ -33,5 +33,11 @@ namespace WebApplication2.Repository
         public bool OwnerExists(int ownerId) => _dataContext.Owners.Any(o => o.Id == ownerId);
 
         public bool Save() => _dataContext.SaveChanges() > 0 ? true : false;
+
+        public bool UpdateOwner(Owner owner)
+        {
+            _dataContext.Update(owner);
+            return Save();
+        }
     }
 }

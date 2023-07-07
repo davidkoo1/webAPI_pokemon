@@ -32,5 +32,11 @@ namespace WebApplication2.Repository
         public ICollection<Owner> GetOwnersFromCountry(int countryId) => _dataContext.Owners.Where(c => c.Country.Id == countryId).ToList();
 
         public bool Save() => _dataContext.SaveChanges() > 0 ? true : false;
+
+        public bool UpdateCountry(Country country)
+        {
+            _dataContext.Update(country);
+            return Save();
+        }
     }
 }

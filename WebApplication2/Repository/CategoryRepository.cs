@@ -30,5 +30,12 @@ namespace WebApplication2.Repository
             .ToList();
 
         public bool Save() => _dataContext.SaveChanges() > 0 ? true : false;
+
+        public bool UpdateCategory(Category category)
+        {
+            _dataContext.Update(category);
+
+            return Save();
+        }
     }
 }

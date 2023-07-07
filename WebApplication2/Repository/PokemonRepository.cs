@@ -62,5 +62,11 @@ namespace WebApplication2.Repository
             var seved = _dataContext.SaveChanges();
             return seved > 0 ? true : false;
         }
+
+        public bool UpdatePokemon(int ownerId, int categoryId, Pokemon pokemon)
+        {
+            _dataContext.Update(pokemon);
+            return Save();
+        }
     }
 }

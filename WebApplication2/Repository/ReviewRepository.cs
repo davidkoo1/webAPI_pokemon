@@ -30,5 +30,11 @@ namespace WebApplication2.Repository
         public bool ReviewExists(int reviewId) => _dataContext.Reviews.Any(x => x.Id == reviewId);
 
         public bool Save() => _dataContext.SaveChanges() > 0 ? true : false;
+
+        public bool UpdateReview(Review review)
+        {
+            _dataContext.Update(review);
+            return Save();
+        }
     }
 }

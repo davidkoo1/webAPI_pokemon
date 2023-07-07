@@ -33,5 +33,11 @@ namespace WebApplication2.Repository
         public bool ReviewerExists(int reviewerId) => _dataContext.Reviewers.Any(r => r.Id == reviewerId);
 
         public bool Save() => _dataContext.SaveChanges() > 0 ? true : false;
+
+        public bool UpdateReviewer(Reviewer reviewer)
+        {
+            _dataContext.Update(reviewer);
+            return Save();
+        }
     }
 }
