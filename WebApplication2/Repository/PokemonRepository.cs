@@ -13,6 +13,32 @@ namespace WebApplication2.Repository
             _dataContext = dataContext;
         }
 
+        public bool CreatePokemon(int ownerId, int categoryId, Pokemon pokemon)
+        {
+            var pokemonOwnerEntity = _dataContext.Owners.Where(x => x.Id == ownerId).FirstOrDefault();
+            var category = _dataContext.Categories.Where(x => x.Id ==  categoryId).FirstOrDefault();
+
+            var pokemonOwner = new PokemonOwner()
+            {
+                Owner = pokemonOwnerEntity,
+                Pokemon = pokemon
+            };
+
+            _dataContext.Add(pokemonOwner);
+
+            var pokemonCategory = new PokemonCategory()
+            {
+                Category = category,
+                Pokemon = pokemon
+            };
+
+            _dataContext.Add(pokemonCategory);
+
+            _dataContext.Add(pokemon);
+
+            return Save();
+        }
+
         public Pokemon GetPokemon(int pokemonId) => _dataContext.Pokemon.Where(p => p.Id == pokemonId).FirstOrDefault();
 
         public Pokemon GetPokemon(string name) => _dataContext.Pokemon.Where(p => p.Name == name).FirstOrDefault();
@@ -30,5 +56,11 @@ namespace WebApplication2.Repository
 
 
         public bool PokemonExist(int pokemonId) => _dataContext.Pokemon.Any(p => p.Id == pokemonId);
+
+        public bool Save()
+        {
+            var seved = _dataContext.SaveChanges();
+            return seved > 0 ? true : false;
+        }
     }
 }

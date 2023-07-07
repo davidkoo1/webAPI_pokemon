@@ -12,6 +12,14 @@ namespace WebApplication2.Repository
         {
             _dataContext = dataContext;
         }
+
+        public bool CreateOwner(Owner owner)
+        {
+            _dataContext.Add(owner);
+
+            return Save();
+        }
+
         public Owner GetOwner(int ownerId) => _dataContext.Owners.Where(x => x.Id == ownerId).FirstOrDefault();
 
         public ICollection<Owner> GetOwnerOfAPokemon(int pokemonId) => _dataContext.PokemonOwners
@@ -23,5 +31,7 @@ namespace WebApplication2.Repository
         public ICollection<Pokemon> GetPokemonByOwner(int ownerId) => _dataContext.PokemonOwners.Where(o => o.Owner.Id == ownerId).Select(p => p.Pokemon).ToList();
 
         public bool OwnerExists(int ownerId) => _dataContext.Owners.Any(o => o.Id == ownerId);
+
+        public bool Save() => _dataContext.SaveChanges() > 0 ? true : false;
     }
 }

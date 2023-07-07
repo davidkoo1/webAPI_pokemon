@@ -13,6 +13,13 @@ namespace WebApplication2.Repository
         }
         public bool CategoryExists(int id) => _dataContext.Categories.Any(c => c.Id == id);
 
+        public bool CreateCategory(Category category)
+        {
+            _dataContext.Add(category);
+
+            return Save();
+        }
+
         public ICollection<Category> GetCategories() => _dataContext.Categories.OrderBy(c => c.Id).ToList();
 
         public Category GetCategory(int id) => _dataContext.Categories.Where(c => c.Id == id).FirstOrDefault();
@@ -21,5 +28,7 @@ namespace WebApplication2.Repository
             .Where(pc => pc.CategoryId == categoryId)
             .Select(c => c.Pokemon)
             .ToList();
+
+        public bool Save() => _dataContext.SaveChanges() > 0 ? true : false;
     }
 }

@@ -15,6 +15,12 @@ namespace WebApplication2.Repository
             _mapper = mapper;
         }
 
+        public bool CreateReview(Review review)
+        {
+            _dataContext.Add(review);
+            return Save();
+        }
+
         public Review GetReview(int reviewId) => _dataContext.Reviews.Where(r => r.Id == reviewId).FirstOrDefault();
 
         public ICollection<Review> GetReviews() => _dataContext.Reviews.ToList();
@@ -22,5 +28,7 @@ namespace WebApplication2.Repository
         public ICollection<Review> GetReviewsOfPokemon(int pokemonId) => _dataContext.Reviews.Where(r => r.Pokemon.Id == pokemonId).ToList();
 
         public bool ReviewExists(int reviewId) => _dataContext.Reviews.Any(x => x.Id == reviewId);
+
+        public bool Save() => _dataContext.SaveChanges() > 0 ? true : false;
     }
 }

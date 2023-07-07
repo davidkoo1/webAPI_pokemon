@@ -14,5 +14,9 @@ namespace WebApplication2.Interfaces
 
         bool CountryExists(int id);
 
+        bool CreateCountry(Country country);
+
+        bool Save();
+
     }
 }
