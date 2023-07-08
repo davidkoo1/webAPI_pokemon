@@ -39,6 +39,12 @@ namespace WebApplication2.Repository
             return Save();
         }
 
+        public bool DeletePokemon(Pokemon pokemon)
+        {
+            _dataContext?.Remove(pokemon);
+            return Save();
+        }
+
         public Pokemon GetPokemon(int pokemonId) => _dataContext.Pokemon.Where(p => p.Id == pokemonId).FirstOrDefault();
 
         public Pokemon GetPokemon(string name) => _dataContext.Pokemon.Where(p => p.Name == name).FirstOrDefault();

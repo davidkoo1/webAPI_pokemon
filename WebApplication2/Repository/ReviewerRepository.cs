@@ -24,6 +24,12 @@ namespace WebApplication2.Repository
             return Save();
         }
 
+        public bool DeleteReviewer(Reviewer reviewer)
+        {
+            _dataContext.Remove(reviewer);
+            return Save();
+        }
+
         public Reviewer GetReviewer(int reviewerId) => _dataContext.Reviewers.Where(r => r.Id == reviewerId).Include(e => e.Reviews).FirstOrDefault();
 
         public ICollection<Reviewer> GetReviewers() => _dataContext.Reviewers.ToList();

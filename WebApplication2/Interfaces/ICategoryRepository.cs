@@ -14,6 +14,7 @@ namespace WebApplication2.Interfaces
 
         bool CreateCategory(Category category);
         bool UpdateCategory(Category category);
+        bool DeleteCategory(Category category);
 
         bool Save();
 

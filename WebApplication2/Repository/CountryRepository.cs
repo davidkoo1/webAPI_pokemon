@@ -23,6 +23,12 @@ namespace WebApplication2.Repository
             return Save();
         }
 
+        public bool DeleteCountry(Country country)
+        {
+            _dataContext.Remove(country);
+            return Save();
+        }
+
         public ICollection<Country> GetCountries() => _dataContext.Countries.ToList();
 
         public Country GetCountry(int id) => _dataContext.Countries.Where(c => c.Id == id).FirstOrDefault();

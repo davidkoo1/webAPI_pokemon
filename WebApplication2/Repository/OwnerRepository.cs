@@ -20,6 +20,12 @@ namespace WebApplication2.Repository
             return Save();
         }
 
+        public bool DeleteOwner(Owner owner)
+        {
+            _dataContext?.Remove(owner);
+            return Save();
+        }
+
         public Owner GetOwner(int ownerId) => _dataContext.Owners.Where(x => x.Id == ownerId).FirstOrDefault();
 
         public ICollection<Owner> GetOwnerOfAPokemon(int pokemonId) => _dataContext.PokemonOwners

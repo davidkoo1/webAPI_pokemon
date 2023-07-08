@@ -12,6 +12,7 @@ namespace WebApplication2.Interfaces
         bool PokemonExist(int pokemonId);
         bool CreatePokemon(int ownerId, int categoryId, Pokemon pokemon);
         bool UpdatePokemon(int ownerId, int categoryId, Pokemon pokemon);
+        bool DeletePokemon(Pokemon pokemon);
         bool Save();
 
     }

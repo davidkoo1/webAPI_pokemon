@@ -20,6 +20,12 @@ namespace WebApplication2.Repository
             return Save();
         }
 
+        public bool DeleteCategory(Category category)
+        {
+            _dataContext.Remove(category);
+            return Save();
+        }
+
         public ICollection<Category> GetCategories() => _dataContext.Categories.OrderBy(c => c.Id).ToList();
 
         public Category GetCategory(int id) => _dataContext.Categories.Where(c => c.Id == id).FirstOrDefault();
